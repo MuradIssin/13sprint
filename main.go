@@ -71,13 +71,12 @@ func main() {
 	// Создаём роутер
 	r := chi.NewRouter()
 
-	// Запуск сервера на указанном порту
-	if err := http.ListenAndServe(":"+portIncome, nil); err != nil {
-		log.Printf("Ошибка при запуске сервера: %v\n", err)
-	}
-
 	// Запускаем Web интерфейс
 	r.Handle("/*", http.FileServer(http.Dir("./web")))
-	r.Post("/api/task", handlers.PostOneTaskHandler)
+	r.Post("/api/task", handlers.AddTask)
 
+	// Запуск сервера на указанном порту
+	if err := http.ListenAndServe(":"+portIncome, r); err != nil {
+		log.Printf("Ошибка при запуске сервера: %v\n", err)
+	}
 }

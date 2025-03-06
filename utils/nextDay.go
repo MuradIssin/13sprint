@@ -34,6 +34,11 @@ func NextDate(now time.Time, date string, repeat string) (string, error) {
 	// Убираем пробелы и приводим строку repeat к нижнему регистру
 	repeat = strings.ToLower(strings.TrimSpace(repeat))
 
+	// если в колонке repeat — пустая строка;
+	// if repeat == "" {
+	// 	return "", fmt.Errorf("правило повторений не содержит данных")
+	// }
+
 	// Переменная для хранения следующей даты
 	var nextDate time.Time
 
